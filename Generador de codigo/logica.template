@@ -1,0 +1,32 @@
+document.querySelector('#btnSubmit').addEventListener('click', guardarDatos{{entity.name|capitalize}});
+imprimirTabla();
+
+
+function guardarDatos{{entity.name|capitalize}}() {
+    var guardar{{entity.name|capitalize}}Titulo = document.querySelector('#title').value,
+        guardar{{entity.name|capitalize}}Director = document.querySelector('#director').value,
+        guardar{{entity.name|capitalize}}Lanzamiento = document.querySelector('#lanzamiento').value;
+    
+    agregarDatos{{entity.name|capitalize}}(guardar{{entity.name|capitalize}}Titulo, guardar{{entity.name|capitalize}}Director, guardar{{entity.name|capitalize}}Lanzamiento);
+    imprimirTabla();
+}
+
+function imprimirTabla() {
+    var lista = obtenerLista{{entity.name|capitalize}}(),
+    tbody = document.querySelector('#tabla{{entity.name|capitalize}} tbody');
+
+    tbody.innerHTML = '';
+
+    for (var i = 0; i < lista.length; i++) {
+        var row = tbody.insertRow(i),
+            tituloCelda = row.insertCell(0),
+            directorCelda = row.insertCell(1);
+            fechaCelda = row.insertCell(2);
+        
+        tituloCelda.innerHTML = lista[i].title;
+        directorCelda.innerHTML = lista[i].director;
+        fechaCelda.innerHTML = lista[i].date;
+
+        tbody.appendChild(row);
+    }
+}

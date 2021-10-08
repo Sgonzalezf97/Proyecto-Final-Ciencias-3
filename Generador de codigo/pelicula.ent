@@ -1,0 +1,5 @@
+entity pelicula {
+  titulo : string
+  director : string
+  FechaLanzamiento : string
+}

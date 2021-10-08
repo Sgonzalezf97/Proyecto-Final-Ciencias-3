@@ -1,0 +1,25 @@
+/**
+ * @ngdoc function
+ * @name nameApp.controller:{{entity.name|capitalize}}datos JS
+ * @description
+ * # Agregar{{entity.name|capitalize}}Ctrl
+ * Controller of the nameApp
+ */
+
+var {{entity.name}}Datos = [];
+
+function agregarDatos{{entity.name|capitalize}}({{entity.name}}Titulo, {{entity.name}}Director,{{entity.name}}FechaLanzamiento) {
+
+    var Nueva{{entity.name|capitalize}} = {
+        title: {{entity.name}}Titulo,
+        director: {{entity.name}}Director,
+        date: {{entity.name}}FechaLanzamiento
+    };
+
+    console.log(Nueva{{entity.name|capitalize}}); 
+    {{entity.name}}Datos.push(Nueva{{entity.name|capitalize}});
+}
+function obtenerLista{{entity.name|capitalize}}() {
+    return {{entity.name}}Datos;
+}
+
