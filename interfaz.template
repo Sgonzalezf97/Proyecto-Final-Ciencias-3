@@ -2,7 +2,7 @@
  * @ngdoc function
  * @name nameApp.controller:{{entity.name|capitalize}}datos JS
  * @description
- * # Agregar{{entity.name|capitalize}}Ctrl
+ * # Agregar{{entity.name|capitalize}}
  * Controller of the nameApp
  */
 

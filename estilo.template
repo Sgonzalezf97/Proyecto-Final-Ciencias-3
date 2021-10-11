@@ -1,0 +1,16 @@
+body {
+  background: url(https://img.utdstc.com/icon/517/a58/517a58f2355d58afbeea7590133367123008d2a8e936944bb15fc06bd392a549:200);
+  background-size: 10%;
+  font-family: Arial, Helvetica, sans-serif;
+  width: 1100px;
+  margin: 10px auto;
+  border: 3px solid black;
+}
+
+div {
+  background-color: rgb(162, 173, 189);
+}
+
+h1 {
+  text-align: center;
+}

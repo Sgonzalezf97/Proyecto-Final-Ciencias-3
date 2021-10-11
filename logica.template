@@ -1,15 +1,57 @@
-document.querySelector('#btnSubmit').addEventListener('click', guardarDatos{{entity.name|capitalize}});
+document.querySelector('#btnSubmit').addEventListener('click', guardarDatosPelicula);
 imprimirTabla();
 
 
-function guardarDatos{{entity.name|capitalize}}() {
+function guardarDatosPelicula() {
     var guardar{{entity.name|capitalize}}Titulo = document.querySelector('#title').value,
         guardar{{entity.name|capitalize}}Director = document.querySelector('#director').value,
         guardar{{entity.name|capitalize}}Lanzamiento = document.querySelector('#lanzamiento').value;
+
+    let errores = [];
+
+        if (guardar{{entity.name|capitalize}}Titulo.trim() == "") {
+            errores.push("Debe ingresar un Titulo");
+        }else if(peliculaDatos.find(p=>p.title.toLowerCase() == guardar{{entity.name|capitalize}}Titulo.toLowerCase()) != undefined){
+            errores.push("El titulo ya existe");
+        }
     
-    agregarDatos{{entity.name|capitalize}}(guardar{{entity.name|capitalize}}Titulo, guardar{{entity.name|capitalize}}Director, guardar{{entity.name|capitalize}}Lanzamiento);
-    imprimirTabla();
+        if (guardar{{entity.name|capitalize}}Director.trim() == "") {
+            errores.push("Debe ingresar un Director");
+        }
+    
+        if (guardar{{entity.name|capitalize}}Lanzamiento.trim() == "") {
+            errores.push("Debe ingresar una fecha de lanzamiento");
+        }
+    
+        if (errores.length == 0) {
+    
+            agregarDatos{{entity.name|capitalize}}(guardar{{entity.name|capitalize}}Titulo, guardar{{entity.name|capitalize}}Director, guardar{{entity.name|capitalize}}Lanzamiento);
+            imprimirTabla();
+        
+        } else {
+            let mensaje = errores.join("<br />")
+            Swal.fire("Errores de validacion", mensaje, "warning");
+        }
 }
+
+const delet = async function () {
+    const idTitulo = this.idTitulo;
+    const res = await Swal.fire({
+        title: '¿Quiere eliminar el titulo?',
+        text: "Una vez eliminado el registro desaparecera de la tabla.",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, eliminar!'
+    });
+    if (res.isConfirmed) {
+        peliculaDatos.splice(idTitulo, 1);
+        imprimirTabla();
+        Swal.fire("Titulo eliminado", "El titulo y su contenido fueron eliminados", "info");
+    }
+};
+
 
 function imprimirTabla() {
     var lista = obtenerLista{{entity.name|capitalize}}(),
@@ -22,10 +64,18 @@ function imprimirTabla() {
             tituloCelda = row.insertCell(0),
             directorCelda = row.insertCell(1);
             fechaCelda = row.insertCell(2);
+            accionCelda = row.insertCell(3);
         
         tituloCelda.innerHTML = lista[i].title;
         directorCelda.innerHTML = lista[i].director;
         fechaCelda.innerHTML = lista[i].date;
+        //accionCelda.classList.add("text-center")
+        let btnELiminar = document.createElement("button");
+        btnELiminar.innerText = "Eliminar titulo";
+        btnELiminar.classList.add("btn", "btn-danger");
+        btnELiminar.idTitulo = i;
+        btnELiminar.addEventListener("click", delet);
+        accionCelda.appendChild(btnELiminar);
 
         tbody.appendChild(row);
     }
