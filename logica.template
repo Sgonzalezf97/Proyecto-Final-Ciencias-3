@@ -37,7 +37,7 @@ function guardarDatosPelicula() {
 const delet = async function () {
     const idTitulo = this.idTitulo;
     const res = await Swal.fire({
-        title: '¿Quiere eliminar el titulo?',
+        title: 'Quiere eliminar el titulo?',
         text: "Una vez eliminado el registro desaparecera de la tabla.",
         icon: 'warning',
         showCancelButton: true,
