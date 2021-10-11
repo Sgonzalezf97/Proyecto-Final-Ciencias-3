@@ -1,7 +1,4 @@
-"""
-An example how to generate angularjs code from textX model using jinja2
-template engine (http://jinja.pocoo.org/docs/dev/)
-"""
+
 from os import mkdir
 from os.path import exists, dirname, join
 import jinja2
@@ -15,7 +12,8 @@ def main(debug=False):
     entity_mm = get_entity_mm(debug)
 
     # Build Person model from pelicula.ent file
-    pelicula_model = entity_mm.model_from_file(join(this_folder, 'pelicula.ent'))
+    pelicula_model = entity_mm.model_from_file(
+        join(this_folder, 'pelicula.ent'))
 
     def is_entity(n):
         """
@@ -31,8 +29,8 @@ def main(debug=False):
         Maps type names from PrimitiveType to Java.
         """
         return {
-                'integer': 'int',
-                'string': 'String'
+            'integer': 'int',
+            'string': 'String'
         }.get(s.name, s.name)
 
     # Create output folder
@@ -69,7 +67,7 @@ def main(debug=False):
         with open(join(srcgen_folder,
                        "interfaz%s.js" % entity.name.capitalize()), 'w') as f:
             f.write(template.render(entity=entity))
-    
+
      # Load template
     template = jinja_env.get_template('logica.template')
 
@@ -78,6 +76,15 @@ def main(debug=False):
         with open(join(srcgen_folder,
                        "logica%s.js" % entity.name.capitalize()), 'w') as f:
             f.write(template.render(entity=entity))
+    # Load template
+    template = jinja_env.get_template('estilo.template')
+
+    for entity in pelicula_model.entities:
+        # For each entity generate css file
+        with open(join(srcgen_folder,
+                       "estilo%s.css" % entity.name.capitalize()), 'w') as f:
+            f.write(template.render(entity=entity))
+
 
 if __name__ == "__main__":
     main()
